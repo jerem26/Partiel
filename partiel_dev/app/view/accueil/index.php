@@ -91,6 +91,38 @@
 
                 ?>
 
+
+                <input type="hidden" name="lat" id="lat" value="<?php echo "${lat}"; ?>"/> 
+				<input type="hidden" name="lng" id="lng" value="<?php echo "${long}"; ?>"/>
+
+				<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+				<script type="text/javascript">
+				var lat = document.getElementById("lat").value;
+				var lng = document.getElementById("lng").value;
+
+					function initialiser() {
+						var latlng = new google.maps.LatLng(lat, lng);
+						//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
+						//de définir des options d'affichage de notre carte
+						var options = {
+							center: latlng,
+							zoom: 11,
+							mapTypeId: google.maps.MapTypeId.ROADMAP
+						};
+						
+						//constructeur de la carte qui prend en paramêtre le conteneur HTML
+						//dans lequel la carte doit s'afficher et les options
+						var carte = new google.maps.Map(document.getElementById("carte"), options);
+					}
+				</script>
+				<div>
+					<br/><br/>
+					Votre position :
+					<div id="carte" style="width:100%; height:300px">
+					</div>
+				</div>
+
+
                 <!-- Jeudi -->
                 <div class="tableau_carte bordure_commande col-lg-12">
                   <h3>La météo : <?php echo "${jour_J} &nbsp;&nbsp;&nbsp; <img src='${icon_J}'>"; ?></h3>
@@ -245,34 +277,12 @@
                   </table>
                   <br/>
             	</div>
+            	<br/><br/>
 
+            	
 
-            
                 
-                <input type="hidden" name="lat" id="lat" value="<?php echo "${lat}"; ?>"/> 
-				<input type="hidden" name="lng" id="lng" value="<?php echo "${long}"; ?>"/>
-				<input type="hidden" name="elev" id="elev" value="<?php echo "${elev}"; ?>"/>
 
-				<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-				<script type="text/javascript">
-					function initialiser() {
-						var latlng = new google.maps.LatLng(46.779231, 6.659431);
-						//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
-						//de définir des options d'affichage de notre carte
-						var options = {
-							center: latlng,
-							zoom: 19,
-							mapTypeId: google.maps.MapTypeId.ROADMAP
-						};
-						
-						//constructeur de la carte qui prend en paramêtre le conteneur HTML
-						//dans lequel la carte doit s'afficher et les options
-						var carte = new google.maps.Map(document.getElementById("carte"), options);
-					}
-				</script>
-
-
-		<div id="carte" style="width:50%; height:50%"></div>
 
 
 <?php include_once('../app/view/include/footer.inc.php'); ?>
